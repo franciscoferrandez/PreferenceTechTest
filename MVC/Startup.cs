@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
+using Infrastructure.IoC;
 
 namespace MVC
 {
@@ -29,6 +30,8 @@ namespace MVC
             services.AddDbContext<ApplicationDBContext>(options => 
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("MVC")));
             services.AddControllersWithViews();
+
+            RegisterServices(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,6 +60,11 @@ namespace MVC
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+
+        private static void RegisterServices(IServiceCollection services)
+        {
+            DependencyContainer.RegisterServices(services);
         }
     }
 }

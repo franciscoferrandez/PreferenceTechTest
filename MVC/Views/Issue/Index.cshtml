@@ -1,0 +1,24 @@
+﻿@model Application.ViewModels.IssueViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<table id="issue" class="table table-bordered table-hover">
+    <thead>
+        <tr class="">
+            <th>Title</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var issue in Model.Issues)
+        {
+            <tr style="height: 60px;">
+                <td>@issue.Title</td>
+                <td>@issue.</td>
+            </tr>
+        }
+    </tbody>
+</table>
