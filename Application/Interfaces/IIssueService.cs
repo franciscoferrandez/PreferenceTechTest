@@ -8,9 +8,10 @@ namespace Application.Interfaces
 {
     public interface IIssueService
     {
-        IssueViewModel GetIssues();
+        IssueViewModel GetIssuesViewModel();
+        List<IssueDTO> GetIssues();
         IssueDTO Save(IssueDTO issue);
-
+        IssueDTO Get(int issueId);
         void Delete(int issueId);
     }
 }

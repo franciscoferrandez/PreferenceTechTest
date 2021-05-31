@@ -18,7 +18,7 @@ namespace Application.Services
             _issueRepository = issueRepository;
         }
 
-        public IssueViewModel GetIssues()
+        public IssueViewModel GetIssuesViewModel()
         {
             return new IssueViewModel()
             {
@@ -26,13 +26,14 @@ namespace Application.Services
             };
         }
 
+        public List<IssueDTO> GetIssues()
+        {
+            return ObjectMapper.Mapper.Map<List<IssueDTO>>(_issueRepository.GetIssues());
+        }
+
         public IssueDTO Save(IssueDTO issue)
         {
-            Issue u = new Issue()
-            {
-                Id = issue.Id,
-                Title = issue.Title,
-            };
+            Issue u = ObjectMapper.Mapper.Map<Issue>(issue);
             if (u.Id == 0)
             {
                 _issueRepository.Save(u);
@@ -41,12 +42,16 @@ namespace Application.Services
             {
                 _issueRepository.Update(u);
             }
-            issue.Id = u.Id;
-            issue.Title = u.Title;
-            issue.Created = u.Created;
+            issue = ObjectMapper.Mapper.Map<IssueDTO>(u);
             return issue;
         }
 
+        public IssueDTO Get(int issueId)
+        {
+            Issue issue = _issueRepository.GetIssue(issueId);
+            if (issue == null) throw new ArgumentException();
+            return ObjectMapper.Mapper.Map<IssueDTO>(issue);
+        }
         public void Delete(int issueId)
         {
             Issue issue = _issueRepository.GetIssue(issueId);

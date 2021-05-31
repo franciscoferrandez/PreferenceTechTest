@@ -1,6 +1,8 @@
 ﻿using Application.Interfaces;
+using Application.Interfaces.API;
 using Application.Services;
 using Domain.Interfaces;
+using Infrastructure.Api;
 using Infrastructure.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -15,9 +17,13 @@ namespace Infrastructure.IoC
         {
             //CleanArchitecture.Application
             services.AddScoped<IIssueService, IssueService>();
+            services.AddScoped<IAsigneeService, AsigneeService>();
 
             //CleanArchitecture.Domain.Interfaces | CleanArchitecture.Infra.Data.Repositories
             services.AddScoped<IIssueRepository, IssueRepository>();
+
+            //CleanArchitecture.Application.API
+            services.AddScoped<IAsigneeAPI, JsonPlaceHolderTypicodeCom>();
         }
     }
 }

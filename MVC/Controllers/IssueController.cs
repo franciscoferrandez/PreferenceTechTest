@@ -18,7 +18,7 @@ namespace MVC.Controllers
         }
         public IActionResult Index()
         {
-            IssueViewModel model = _issueService.GetIssues();
+            IssueViewModel model = _issueService.GetIssuesViewModel();
             return View(model);
         }
     }
