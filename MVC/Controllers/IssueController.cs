@@ -1,4 +1,5 @@
-﻿using Application.Interfaces;
+﻿using Application.DTO;
+using Application.Interfaces;
 using Application.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
