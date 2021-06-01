@@ -34,9 +34,12 @@ namespace Application.Services
             return (List<AsigneeDTO>)_asigneeApi.GetAll();
         }
 
-        public AsigneeViewModel GetAsigneeViewModel()
+        public AsigneeViewModel GetAsigneesViewModel()
         {
-            throw new NotImplementedException();
+            return new AsigneeViewModel()
+            {
+                Asignees = (IEnumerable<Asignee>)GetAsignees()
+            };
         }
 
         public AsigneeDTO Save(AsigneeDTO asignee)

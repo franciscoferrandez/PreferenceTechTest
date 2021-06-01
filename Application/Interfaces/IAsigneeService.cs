@@ -8,7 +8,7 @@ namespace Application.Interfaces
 {
     public interface IAsigneeService
     {
-        AsigneeViewModel GetAsigneeViewModel();
+        AsigneeViewModel GetAsigneesViewModel();
         List<AsigneeDTO> GetAsignees();
         AsigneeDTO Save(AsigneeDTO asignee);
         AsigneeDTO Get(int asigneeId);

@@ -1,0 +1,28 @@
+﻿@model List<Application.DTO.AsigneeDTO>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<table id="issue" class="table table-bordered table-hover">
+    <thead>
+        <tr class="">
+            <th>Id</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var asignee in Model)
+        {
+        <tr style="height: 60px;">
+            <td>@asignee.id</td>
+            <td>@asignee.name</td>
+            <td>@asignee.phone</td>
+            <td>@asignee.email</td>
+        </tr>
+        }
+    </tbody>
+</table>
