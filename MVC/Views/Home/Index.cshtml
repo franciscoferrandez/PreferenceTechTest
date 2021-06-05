@@ -2,7 +2,47 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@section Scripts {
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.0/css/foundation.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.1/js/foundation.min.js"></script>
+
+    <script src="https://use.fontawesome.com/24fc242ce0.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/16.3.5/Tween.min.js"></script>
+    
+    <link href="@Url.Content("~/IssuesApp/IssuesApp.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/IssuesApp/IssuesApp.js")"></script>
+}
+<div id="chartpanel" class="row" data-equalizer>
+
+    <div class="column small-12 left_panel">
+        <header data-equalizer-watch>
+            <div id="chart_title">
+                <h2>Issues</h2>
+            </div>
+        </header>
+
+
+        <div id="chart_table">
+            <form id="chart_datas">
+                <div class="grid-container">
+                    <div class="grid-x grid-padding-x input_wrp">
+                        <div class="small-12 cell column">
+                            <label>
+                                <input type="text" placeholder="Enter new issue title" v-model="label" id="label" name="label">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="addRowBtn" v-on:click.prevent="addRow" value=""><i class="fa fa-plus" aria-hidden="true"></i></div>
+                </div>
+
+            </form>
+
+            <charttable v-bind:proplabels="labels"> </charttable>
+        </div>
+    </div>
 </div>
+
+

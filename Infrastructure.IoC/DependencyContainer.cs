@@ -17,6 +17,9 @@ namespace Infrastructure.IoC
         {
             //CleanArchitecture.Application
             services.AddScoped<IIssueService, IssueService>();
+            services.AddScoped<IIssueStatusService, IssueStatusService>();
+            services.AddScoped<IIssueSeverityService, IssueSeverityService>();
+
             services.AddScoped<IAsigneeService, AsigneeService>();
 
             //CleanArchitecture.Domain.Interfaces | CleanArchitecture.Infra.Data.Repositories
