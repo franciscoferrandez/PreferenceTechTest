@@ -37,17 +37,19 @@ namespace MVC.Controllers.API
 
         // POST api/<IssuesController>
         [HttpPost]
-        public void Post([FromBody] IssueDTO value)
+        public IssueDTO Post([FromBody] IssueDTO value)
         {
             IssueDTO issue = _issueService.Save(value);
+            return issue;
         }
 
         // PUT api/<IssuesController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] IssueDTO value)
+        public IssueDTO Put(int id, [FromBody] IssueDTO value)
         {
             value.Id = id;
             IssueDTO issue = _issueService.Save(value);
+            return issue;
         }
 
         // DELETE api/<IssuesController>/5

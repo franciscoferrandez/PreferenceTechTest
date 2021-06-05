@@ -116,12 +116,20 @@ const app = new Vue({
         addRow: function (event) {
             lastId = this.labels.length;
             var newRow = {
-                id: this.nextBarId++,
-                percentual: this.value,
-                label: this.label,
-                icon: this.icon
+                //id: this.nextBarId++,
+                title: this.label,
+                status: 0,
+                severity: 0
             };
-            this.labels.push(newRow);
+
+            doPost('Issues', newRow).then(response => {
+                var newIssue = response;
+                newIssue.asigneeOptions = this.asigneeOptions;
+                newIssue.statusOptions = this.statusOptions;
+                newIssue.severityOptions = this.severityOptions;
+                this.labels.push(newIssue);
+            });
+            
         },
         fetchIssues: function () {
             this.responseAvailable = false;
@@ -183,6 +191,27 @@ function fetchAny (controller) {
                 }
             })
     }
+}
+
+function doPost(controller, obj) {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(obj)
+    };
+    return fetch('/api/' + controller, requestOptions)
+        .then(response => {
+            if (response.ok) {
+                return response.json()
+            } else {
+                console.log("Server error " + response.status + " : " + response.statusText);
+                return Promise.resolve([]);
+            }
+        })
+        .catch(error => {
+            console.error(error);
+            Promise.reject(error);
+        });
 }
 
 function getLsArray(key) {
