@@ -25,23 +25,23 @@
         </div>
     <div v-for="(val, index)al in proplabels" class="row table_cell">
         <div class="small-12 medium-1 column">
-            <input type="text" v-model="val.id" disabled></input>
+            <input type="text" v-model="val.id" disabled @change="app.issueModified($event,index)"></input>
         </div>
         <div class="small-12 medium-6 column single-cel">
-            <input type="text" v-model="val.title" v-bind:disabled="disabled"> </input>
+            <input type="text" v-model="val.title" v-bind:disabled="disabled" v-on:keyup.stop.prevent="app.issueModified($event,index)" @change="app.issueModified($event,index)"> </input>
         </div>
         <div class="small-12 medium-1 column single-cel">
-            <select class="form-control">
+            <select class="form-control" v-model="val.severity" @change="app.issueModified($event,index)">
                 <option v-for="option in val.severityOptions" v-bind:value="option.id" >{{ option.title }}</option>
             </select>
         </div>
         <div class="small-12 medium-1 column single-cel">
-            <select class="form-control" v-model="val.status">
+            <select class="form-control" v-model="val.status" @change="app.issueModified($event,index)">
                 <option v-for="option in val.statusOptions" v-bind:value="option.id" >{{ option.title }}</option>
             </select>
         </div>
         <div class="small-12 medium-2 column single-cel">
-            <select class="form-control" v-model="val.asignee">
+            <select class="form-control" v-model="val.asignee" @change="app.issueModified($event,index)">
                 <option></option>
                 <option v-for="option in val.asigneeOptions" v-bind:value="option.id" >{{ option.name }}</option>
             </select>
@@ -54,7 +54,25 @@
                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
             </span>
         </div>
+    </div> <!-- .table_cell -->
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputCity">City</label>
+      <input type="text" class="form-control" id="inputCity">
     </div>
+    <div class="form-group col-md-4">
+      <label for="inputState">State</label>
+      <select id="inputState" class="form-control">
+        <option selected>Choose...</option>
+        <option>...</option>
+      </select>
+    </div>
+    <div class="form-group col-md-2">
+      <label for="inputZip">Zip</label>
+      <input type="text" class="form-control" id="inputZip">
+    </div>
+  </div>
 
 
 </div>
@@ -162,6 +180,12 @@ const app = new Vue({
                 .catch(err => {
                     console.log(err);
                 });
+        },
+        issueModified: function (event,index) {
+            //this.user.address.country = event.target.value
+            //this.selectedCountry = event.target.options[event.target.options.selectedIndex].text
+
+            doPost("issues", this.labels[index]);
         }
     }
 });
