@@ -52,11 +52,12 @@ namespace Application.Services
             if (issue == null) throw new ArgumentException();
             return ObjectMapper.Mapper.Map<IssueDTO>(issue);
         }
-        public void Delete(int issueId)
+        public IssueDTO Delete(int issueId)
         {
             Issue issue = _issueRepository.GetIssue(issueId);
             if (issue == null) throw new ArgumentException();
             _issueRepository.Delete(issue);
+            return ObjectMapper.Mapper.Map<IssueDTO>(issue);
         }
     }
 }

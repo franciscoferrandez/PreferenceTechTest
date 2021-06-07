@@ -54,9 +54,10 @@ namespace MVC.Controllers.API
 
         // DELETE api/<IssuesController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IssueDTO Delete(int id)
         {
-            _issueService.Delete(id);
+            IssueDTO deleted = _issueService.Delete(id);
+            return deleted;
         }
     }
 }

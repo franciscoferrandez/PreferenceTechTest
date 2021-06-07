@@ -84,7 +84,6 @@ const app = new Vue({
 
     },
     mounted: function () {
-        this.$refs.newIssueLabel.focus();
 
         var pStatus = fetchAny("issueStatus");
         var pSeverity = fetchAny("issueSeverity");
@@ -101,6 +100,8 @@ const app = new Vue({
             this.asigneeOptions = values[2];
 
             this.fetchIssues();
+
+            this.$refs.newIssueLabel.focus();
 
         }, reason => {
             console.log(reason)
@@ -143,10 +144,6 @@ const app = new Vue({
                     }
                 })
                 .then(response => {
-                    console.log("fin fetchIssues");
-                    response.forEach(item => {
-                        console.log(item.statusOptions);
-                    });
                     this.issues = (response);
                     this.responseAvailable = true;
                 })
@@ -158,7 +155,6 @@ const app = new Vue({
             doPost("issues", this.issues[index]);
         },
         deleteEvent: function (index) {
-            console.log("Delete");
             doDelete("issues", this.issues[index].id);
             this.issues.splice(index, 1);
         }
@@ -183,8 +179,7 @@ function fetchAny (controller) {
         })
             .then(response => {
                 if (response.ok) {
-                    //return response.json()
-                    return Promise.resolve([]);
+                    return response.json()
                 } else {
                     console.log("Server error " + response.status + " : " + response.statusText);
                     return Promise.reject([]);
@@ -222,10 +217,10 @@ function doDelete(controller, id) {
     return fetch('/api/' + controller + "/" + id, requestOptions)
         .then(response => {
             if (response.ok) {
-                return response.json()
+                return Promise.resolve([]);
             } else {
                 console.log("Server error " + response.status + " : " + response.statusText);
-                return Promise.resolve([]);
+                return Promise.reject([]);
             }
         })
         .catch(error => {

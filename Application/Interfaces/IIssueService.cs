@@ -12,6 +12,6 @@ namespace Application.Interfaces
         List<IssueDTO> GetIssues();
         IssueDTO Save(IssueDTO issue);
         IssueDTO Get(int issueId);
-        void Delete(int issueId);
+        IssueDTO Delete(int issueId);
     }
 }
