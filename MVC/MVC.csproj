@@ -18,4 +18,8 @@
     <ProjectReference Include="..\Infrastructure.IoC\Infrastructure.IoC.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\assets\logo\" />
+  </ItemGroup>
+
 </Project>

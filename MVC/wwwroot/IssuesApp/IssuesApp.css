@@ -10,8 +10,41 @@
     --green: #037367;
     --sangria: #00281f;
     --white: #fff;
+
+    --preference: #FB903E;
+    /* https://www.color-hex.com/color/fb903e */
+    /* shadows */
+    --preference-sh1: #e18137;
+    --preference-sh2: #c87331;
+    --preference-sh3: #af642b;
+    --preference-sh4: #965625;
+    --preference-sh5: #7d481f;
+    --preference-sh6: #643918;
+    --preference-sh7: #4b2b12;
+    --preference-sh8: #321c0c;
+    --preference-sh9: #190e06;
+    --preference-sh10: #000000;
+    /* tints */
+    --preference-tint1: #fb9b51;
+    --preference-tint2: #fba664;
+    --preference-tint3: #fcb177;
+    --preference-tint4: #fcbc8b;
+    --preference-tint5: #fdc79e;
+    --preference-tint6: #fdd2b1;
+    --preference-tint7: #fdddc5;
+    --preference-tint8: #fee8d8;
+    --preference-tint9: #fef3eb;
+    --preference-tint10: #ffffff;
+    /* monochromatic */
+    --preference-mono-minus-3: #e86705;
+    --preference-mono-minus-2: #fa730c;
+    --preference-mono-minus-1: #fa8225;
+    --preference-mono-plus-1: #fc9e57;
+    --preference-mono-plus-2: #fcad70;
+    --preference-mono-plus-3: #fdbb89;
+    --preference-complementary: #3ea9fb;
     /* Transition */
-    --transition-short: all .5s ease-in-out;
+    --transition-short: all .3s;
     /* padding */
     --padding-standard: 1rem;
 }
@@ -27,22 +60,6 @@ button {
 
 body {
     font-family: var(--work); /* IE10+ */
-    background-image: -ms-linear-gradient(bottom, #7BD4CC 0%, #037367 100%);
-    /* Mozilla Firefox */
-    background-image: -moz-linear-gradient(bottom, #7BD4CC 0%, #037367 100%);
-    /* Opera */
-    background-image: -o-linear-gradient(bottom, #7BD4CC 0%, #037367 100%);
-    /* Webkit (Safari/Chrome 10) */
-    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #7BD4CC), color-stop(100, #037367));
-    /* Webkit (Chrome 11+) */
-    background-image: -webkit-linear-gradient(bottom, #7BD4CC 0%, #037367 100%);
-    /* W3C Markup */
-    background-image: linear-gradient(to top, #7BD4CC 0%, #037367 100%);
-    /*
-    display: flex;
-    align-items: center;
-    align-content: center;
-        */
 }
 
 h2, p, input, h1, h3 {
@@ -55,7 +72,7 @@ h2, p, input, h1, h3 {
 }
 
     .left_panel header {
-        background-color: var(--h2o);
+        background-color: var(--preference);
         padding: var(--padding-standard);
     }
 
@@ -64,10 +81,10 @@ h2, p, input, h1, h3 {
 }
 
 #chartpanel {
-    background-color: #fafafa;
-    NO_max-width: 50rem;
+    background-color: white;
     height: auto;
     border-radius: 7px;
+    border: var(--preference-tint7) 1px solid;
 }
 
 
@@ -91,16 +108,13 @@ h2, p, input, h1, h3 {
 .addRowBtn {
     width: auto;
     position: absolute;
-    left: 2rem;
+    right: 2rem;
     font-size: 2rem;
-    background-color: var(--honey);
+    background-color: var(--preference-sh2);
     padding: .1rem .9rem;
     border-radius: 2rem;
     margin-top: -4rem;
     z-index: 999999999999999;
-    -webkit-box-shadow: 0px 3px 1px 0px rgba(0,0,0,0.45);
-    -moz-box-shadow: 0px 3px 1px 0px rgba(0,0,0,0.45);
-    box-shadow: 0px 3px 1px 0px rgba(0,0,0,0.45);
     cursor: pointer;
     opacity: 1;
     -webkit-transition: var(--transition-short);
@@ -110,7 +124,9 @@ h2, p, input, h1, h3 {
 }
 
     .addRowBtn:hover {
-        opacity: .8;
+        -webkit-box-shadow: -2px 3px 1px 0px rgba(0,0,0,0.45);
+        -moz-box-shadow: -2px 3px 1px 0px rgba(0,0,0,0.45);
+        box-shadow: -2px 3px 1px 0px rgba(0,0,0,0.45);
     }
 
     .addRowBtn .fa {
@@ -126,7 +142,7 @@ h2, p, input, h1, h3 {
 
 .edit_mode {
     cursor: pointer;
-    color: var(--h20);
+    color: var(--preference-sh2);
     position: absolute;
     right: 1.3rem;
     -webkit-transition: var(--transition-short);
@@ -137,7 +153,7 @@ h2, p, input, h1, h3 {
 }
 
     .edit_mode:hover {
-        color: #666;
+        opacity: .6;
     }
 
 .edit_panel {
@@ -147,20 +163,20 @@ h2, p, input, h1, h3 {
 }
 
     .edit_panel button {
-        color: var(--sangria);
+        color: var(--preference-sh2);
     }
 
         .edit_panel button:hover {
-            opacity: .5;
+            opacity: .6;
         }
 
 .left_panel {
     overflow: hidden;
     position: relative;
     border-radius: 7px;
-    -webkit-box-shadow: 0px 0px 20px 0px rgba(50, 50, 50, 0.57);
-    -moz-box-shadow: 0px 0px 20px 0px rgba(50, 50, 50, 0.57);
-    box-shadow: 0px 0px 20px 0px rgba(50, 50, 50, 0.57);
+    -webkit-box-shadow: 0px 0px 20px 0px var(--preference-sh2);
+    -moz-box-shadow: 0px 0px 20px 0px var(--preference-sh2);
+    box-shadow: 0px 0px 20px 0px var(--preference-sh2);
 }
 
     .left_panel header {
@@ -196,13 +212,15 @@ h2, p, input, h1, h3 {
     padding: 0px;
 }
 
-#chart_datas input {
+#chart_datas input,
+#chart_datas select {
     border-top: 0px;
     border-left: 0px;
     border-right: 0px;
     box-shadow: none;
-    background-color: rgba(255,255,255,.30);
-    border-color: var(--h2o);
+    background-color: rgba(255,255,255,.0);
+    border-color: var(--preference-sh2);
+    color: var(--preference-sh2);
 }
 
 #cart_table, #chart_datas {
@@ -228,17 +246,19 @@ h2, p, input, h1, h3 {
 
     #chart_table .top_titles div {
         text-align: center;
-        color: var(--green);
+        color: var(--preference-sh2);
         text-transform: uppercase;
         font-size: 75%;
     }
 
-    #chart_table div.table_cell input {
+    #chart_table div.table_cell input,
+    #chart_table div.table_cell select {
         border: 0px;
-        background-color: rgba(0,0,0,.05);
+        background-color: rgba(0,0,0,.02);
         text-align: center;
-        color: var(--army);
+        color: var(--preference-sh1);
         font-weight: 500;
+        box-shadow: inset 0 1px 2px hsl(0deg 0% 4% / 10%);
     }
 
         #chart_table div.table_cell input[type="text"]:disabled {
@@ -259,3 +279,4 @@ h2, p, input, h1, h3 {
         width: 100%;
         border-left: 2px solid rgba(0,0,0,.2);
     }
+    

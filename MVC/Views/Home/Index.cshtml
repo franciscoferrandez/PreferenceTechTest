@@ -30,7 +30,7 @@
                     <div class="grid-x grid-padding-x input_wrp">
                         <div class="small-12 cell column">
                             <label>
-                                <input type="text" placeholder="Enter new issue title" v-model="label" id="label" name="label">
+                                <input type="text" placeholder="Enter new issue title" autocomplete="off" v-model="newIssueLabel" id="newIssueLabel" name="newIssueLabel" ref="newIssueLabel" v-on:keydown.enter.stop.prevent="addRow">
                             </label>
                         </div>
                     </div>
@@ -40,7 +40,7 @@
 
             </form>
 
-            <charttable v-bind:proplabels="labels"> </charttable>
+            <issuestable v-bind:propissues="issues" v-on:delete-issue-index="deleteEvent"  v-on:update-issue-index="issueModified"> </issuestable>
         </div>
     </div>
 </div>
