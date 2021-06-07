@@ -11,10 +11,13 @@ namespace Application.DTO
 
         public string Title { get; set; }
 
+        public string Description { get; set; }
+
         public IssueSeverity Severity { get; set; }
 
         public IssueStatus Status { get; set; }
 
+        public int Asignee { get; set; }
 
     }
 }

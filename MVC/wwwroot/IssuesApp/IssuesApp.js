@@ -32,22 +32,22 @@
         </div>
         <div class="small-12 medium-1 column single-cel">
             <select class="form-control" v-model="val.severity" @change="app.issueModified($event,index)">
-                <option v-for="option in val.severityOptions" v-bind:value="option.id" >{{ option.title }}</option>
+                <option v-for="option in app.severityOptions" v-bind:value="option.id" >{{ option.title }}</option>
             </select>
         </div>
         <div class="small-12 medium-1 column single-cel">
             <select class="form-control" v-model="val.status" @change="app.issueModified($event,index)">
-                <option v-for="option in val.statusOptions" v-bind:value="option.id" >{{ option.title }}</option>
+                <option v-for="option in app.statusOptions" v-bind:value="option.id" >{{ option.title }}</option>
             </select>
         </div>
         <div class="small-12 medium-2 column single-cel">
             <select class="form-control" v-model="val.asignee" @change="app.issueModified($event,index)">
                 <option></option>
-                <option v-for="option in val.asigneeOptions" v-bind:value="option.id" >{{ option.name }}</option>
+                <option v-for="option in app.asigneeOptions" v-bind:value="option.id" >{{ option.name }}</option>
             </select>
         </div>
         <div class="small-12 medium-1 column edit_panel">
-            <button @click="deleteEvent(index)">
+            <button @click="app.deleteEvent($event,index)">
                 <i class="fa fa-times" aria-hidden="true"></i>
             </button>
 <span class="edit_mode" @click="disabled = !disabled">
@@ -134,7 +134,6 @@ const app = new Vue({
         addRow: function (event) {
             lastId = this.labels.length;
             var newRow = {
-                //id: this.nextBarId++,
                 title: this.label,
                 status: 0,
                 severity: 0
@@ -142,9 +141,6 @@ const app = new Vue({
 
             doPost('Issues', newRow).then(response => {
                 var newIssue = response;
-                newIssue.asigneeOptions = this.asigneeOptions;
-                newIssue.statusOptions = this.statusOptions;
-                newIssue.severityOptions = this.severityOptions;
                 this.labels.push(newIssue);
             });
             
@@ -169,9 +165,6 @@ const app = new Vue({
                 .then(response => {
                     console.log("fin fetchIssues");
                     response.forEach(item => {
-                        item.asigneeOptions = this.asigneeOptions;
-                        item.statusOptions = this.statusOptions;
-                        item.severityOptions = this.severityOptions;
                         console.log(item.statusOptions);
                     });
                     this.labels = (response);
@@ -182,10 +175,11 @@ const app = new Vue({
                 });
         },
         issueModified: function (event,index) {
-            //this.user.address.country = event.target.value
-            //this.selectedCountry = event.target.options[event.target.options.selectedIndex].text
-
             doPost("issues", this.labels[index]);
+        },
+        deleteEvent: function (event, index) {
+            console.log("Delete");
+            doDelete("issues", this.labels[index].id);
         }
     }
 });
@@ -224,6 +218,26 @@ function doPost(controller, obj) {
         body: JSON.stringify(obj)
     };
     return fetch('/api/' + controller, requestOptions)
+        .then(response => {
+            if (response.ok) {
+                return response.json()
+            } else {
+                console.log("Server error " + response.status + " : " + response.statusText);
+                return Promise.resolve([]);
+            }
+        })
+        .catch(error => {
+            console.error(error);
+            Promise.reject(error);
+        });
+}
+
+function doDelete(controller, id) {
+    const requestOptions = {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' }
+    };
+    return fetch('/api/' + controller + "/" + id, requestOptions)
         .then(response => {
             if (response.ok) {
                 return response.json()
